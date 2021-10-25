@@ -37,6 +37,8 @@ class Register : AppCompatActivity() {
             registerUser()
         }
 
+        supportActionBar?.hide()
+
         val button = findViewById<Button>(R.id.registerbtn)
 
         button.setOnClickListener{

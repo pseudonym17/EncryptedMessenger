@@ -23,6 +23,8 @@ class Login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val button = findViewById<Button>(R.id.loginbtn)
 
         button.setOnClickListener{
