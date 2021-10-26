@@ -73,6 +73,9 @@ class Register : AppCompatActivity() {
                     refUsers = FirebaseDatabase.getInstance().reference.child("Users")
                         .child(firebaseUserID)
 
+                    // Save username
+                    Singleton.username = username
+
                     val userHashMap = HashMap<String, Any>()
                     userHashMap["uid"] = firebaseUserID
                     userHashMap["username"] = username

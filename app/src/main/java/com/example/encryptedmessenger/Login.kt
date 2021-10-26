@@ -41,8 +41,13 @@ class Login : AppCompatActivity() {
     {
         val username: String = binding.username.text.toString()
         val password: String = binding.password.text.toString()
+        val email: String = binding.email.text.toString()
 
-        if (username == "")
+        if (email == "")
+        {
+            Toast.makeText(this@Login, "Please Enter Email.", Toast.LENGTH_LONG).show()
+        }
+        else if (username == "")
         {
             Toast.makeText(this@Login, "Please Enter Username.", Toast.LENGTH_LONG).show()
         }
@@ -52,10 +57,12 @@ class Login : AppCompatActivity() {
         }
         else
         {
-            mAuth.signInWithEmailAndPassword(username, password)
+            mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful)
                     {
+                        //Set username
+                        Singleton.username = username
                         val intent = Intent(this@Login, Menu::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
