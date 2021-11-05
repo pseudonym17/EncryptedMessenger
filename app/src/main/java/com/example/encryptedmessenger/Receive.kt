@@ -41,8 +41,6 @@ class Receive : AppCompatActivity() {
                 }
             }
             database.child(conversation).addValueEventListener(listener)
-
-
         }
 
         binding.logo.setOnClickListener {
