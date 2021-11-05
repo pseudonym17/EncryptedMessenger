@@ -68,6 +68,7 @@ class Register : AppCompatActivity() {
         }
         else if (password == "") {
             Toast.makeText(this@Register, "please enter password.", Toast.LENGTH_LONG)
+
                 .show()
         }
         else if (username != "") {
@@ -102,7 +103,7 @@ class Register : AppCompatActivity() {
                     userHashMap["search"] = username.lowercase()
 //                    userHashMap["facebook"] = "https://m.facebook.com"
 //                    userHashMap["instagram"] = "https://m.instagram.com"
-//                    userHashMap["website"] = "https://www.google.com"
+//                  userHashMap["website"] = "https://www.google.com"
 
                     refUsers.updateChildren(userHashMap)
                         .addOnCompleteListener { task ->
