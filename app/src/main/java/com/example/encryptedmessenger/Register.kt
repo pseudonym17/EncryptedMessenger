@@ -9,6 +9,7 @@ import android.view.View.inflate
 import android.widget.Toast
 import com.example.encryptedmessenger.databinding.ActivityRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.DatabaseReference
 
@@ -61,12 +62,26 @@ class Register : AppCompatActivity() {
         if (username == "") {
             Toast.makeText(this@Register, "please enter username.", Toast.LENGTH_LONG)
                 .show()
-        } else if (email == "") {
+        }
+        else if (email == "") {
             Toast.makeText(this@Register, "please enter email.", Toast.LENGTH_LONG).show()
-        } else if (password == "") {
+        }
+        else if (password == "") {
             Toast.makeText(this@Register, "please enter password.", Toast.LENGTH_LONG)
                 .show()
-        } else {
+        }
+        else if (username != "") {
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+            ref.child("users").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.exists()){
+                        // use "username" already exists
+                        // Let the user know he needs to pick another username.
+                    }
+        }
+        else {
+
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     firebaseUserID = mAuth.currentUser!!.uid
