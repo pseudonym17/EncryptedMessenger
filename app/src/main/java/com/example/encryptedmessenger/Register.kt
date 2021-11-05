@@ -65,6 +65,7 @@ class Register : AppCompatActivity() {
             Toast.makeText(this@Register, "please enter email.", Toast.LENGTH_LONG).show()
         } else if (password == "") {
             Toast.makeText(this@Register, "please enter password.", Toast.LENGTH_LONG)
+
                 .show()
         } else {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -87,7 +88,7 @@ class Register : AppCompatActivity() {
                     userHashMap["search"] = username.lowercase()
 //                    userHashMap["facebook"] = "https://m.facebook.com"
 //                    userHashMap["instagram"] = "https://m.instagram.com"
-//                    userHashMap["website"] = "https://www.google.com"
+//                  userHashMap["website"] = "https://www.google.com"
 
                     refUsers.updateChildren(userHashMap)
                         .addOnCompleteListener { task ->

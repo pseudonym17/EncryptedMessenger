@@ -31,7 +31,6 @@ class Receive : AppCompatActivity() {
                         var key = child.key.toString()
                         if (key == "message") {
                             message = child.getValue().toString()
-                            println("Message: $message")
                             binding.message.text = message
                         }
                     }
@@ -41,7 +40,6 @@ class Receive : AppCompatActivity() {
                 }
             }
             database.child(conversation).addValueEventListener(listener)
-
 
         }
 

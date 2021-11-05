@@ -24,6 +24,10 @@ class Menu : AppCompatActivity() {
             val intent = Intent(this@Menu, Receive::class.java)
             startActivity(intent)
         }
+        binding.contactsbtn.setOnClickListener {
+            val intent = Intent(this@Menu, Contacts::class.java)
+            startActivity(intent)
+        }
         binding.signoutbtn.setOnClickListener {
             val intent = Intent(this@Menu, Welcome::class.java)
             startActivity(intent)
