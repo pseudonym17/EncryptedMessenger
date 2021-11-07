@@ -35,7 +35,7 @@ class Contacts : AppCompatActivity() {
                 println("ERROR: $error")
             }
         }
-        database.child(user).addValueEventListener(listener)
+        //database.child(user).addValueEventListener(listener)
 
         binding.addbtn.setOnClickListener {
             val contact: String = binding.newcontact.text.toString()

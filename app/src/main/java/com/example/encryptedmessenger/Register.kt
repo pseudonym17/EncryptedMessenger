@@ -71,7 +71,7 @@ class Register : AppCompatActivity() {
 
                 .show()
         }
-        else if (username != "") {
+        /*else if (username != "") {
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
             ref.child("users").child("username").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -80,7 +80,7 @@ class Register : AppCompatActivity() {
                         // use "username" already exists
                         // Let the user know he needs to pick another username.
                     }
-        }
+        }*/
         else {
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
