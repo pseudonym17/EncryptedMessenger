@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import com.example.encryptedmessenger.databinding.ActivityContactsBinding
 import com.example.encryptedmessenger.databinding.ActivityMenuBinding
@@ -23,12 +24,23 @@ class Contacts : AppCompatActivity() {
         database = FirebaseDatabase.getInstance().getReference("UserContacts")
         val user = Singleton.username.toString()
 
+        var contactList: MutableList<String?> = ArrayList()
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (child in snapshot.children) {
                     var contact = child.getValue().toString()
-                    Toast.makeText(this@Contacts, "Contacts: $contact", Toast.LENGTH_LONG).show()
-                    addContactButton(contact)
+                    println("Contact: $contact")
+                    var isNew = true
+                    for (c in contactList) {
+                        if (contact == c) {
+                            isNew = false
+                            break
+                        }
+                    }
+                    if (isNew) {
+                        contactList.add(contact)
+                        addContact(contact)
+                    }
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -39,7 +51,6 @@ class Contacts : AppCompatActivity() {
 
         binding.addbtn.setOnClickListener {
             val contact: String = binding.newcontact.text.toString()
-
             database.child(user).child(contact).setValue(contact).addOnSuccessListener {
                 Toast.makeText(this, "Contact Saved", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
@@ -52,9 +63,10 @@ class Contacts : AppCompatActivity() {
         setContentView(binding.root)
     }
 
-    fun addContactButton(contact : String) {
-        val contactButton = Button(this)
+    fun addContact(contact : String?) {
         val layout = findViewById<LinearLayout>(R.id.layout)
+
+        val contactButton = Button(this)
         contactButton.layoutParams = LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
@@ -62,5 +74,22 @@ class Contacts : AppCompatActivity() {
         contactButton.text = contact
         contactButton.setBackgroundColor(Color.CYAN)
         layout.addView(contactButton)
+        // just call message page and
+        // save a contact singleton to the contact value
+
+    }
+
+    fun addContactButton(contactList : MutableList<String?>) {
+        val layout = findViewById<LinearLayout>(R.id.layout)
+        for (contact in contactList) {
+            val contactButton = Button(this)
+            contactButton.layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            contactButton.text = contact
+            contactButton.setBackgroundColor(Color.CYAN)
+            layout.addView(contactButton)
+        }
     }
 }

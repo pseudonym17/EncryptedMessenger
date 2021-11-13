@@ -63,6 +63,8 @@ class Login : AppCompatActivity() {
                     {
                         //Set username
                         Singleton.username = username
+                        // Need to set uid
+                        //Singleton.uid = uid
                         val intent = Intent(this@Login, Menu::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent)
