@@ -17,6 +17,8 @@ class Send : AppCompatActivity() {
         binding = ActivitySendBinding.inflate(layoutInflater)
 
         supportActionBar?.hide()
+        var contact = Singleton.currentContact
+        Toast.makeText(this, "Contact: $contact", Toast.LENGTH_SHORT).show()
 
         binding.button.setOnClickListener {
 
